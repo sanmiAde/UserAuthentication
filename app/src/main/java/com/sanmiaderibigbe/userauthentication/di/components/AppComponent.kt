@@ -6,7 +6,7 @@ import com.sanmiaderibigbe.userauthentication.di.module.AppModule
 import com.sanmiaderibigbe.userauthentication.di.module.NetworkModule
 import com.sanmiaderibigbe.userauthentication.di.module.ActivityBuilderModule
 import com.sanmiaderibigbe.userauthentication.di.module.ViewModelFactoryModule
-import com.sanmiaderibigbe.userauthentication.di.qualifiers.sharedPreference
+import com.sanmiaderibigbe.userauthentication.di.qualifiers.SharedPreference
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -23,7 +23,7 @@ interface AppComponent : AndroidInjector<UserAuthenticationApplication> {
         @BindsInstance
         fun  application(app: Application) : Builder
         @BindsInstance
-        fun sharePrefrence(@sharedPreference name : String) : Builder
+        fun sharePrefrence(@SharedPreference name : String) : Builder
 
         fun build() : AppComponent
 

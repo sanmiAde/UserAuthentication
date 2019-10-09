@@ -10,7 +10,7 @@ class UserAuthenticationApplication : DaggerApplication() {
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
        return DaggerAppComponent
             .builder()
-           .sharePrefrence(AppConstants.PREF_NAME)
+            .sharePrefrence(AppConstants.PREF_NAME)
             .application(this).build()
     }
 

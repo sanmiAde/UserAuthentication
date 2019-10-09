@@ -11,5 +11,5 @@ abstract class ViewModelFactoryModule {
 
     @Binds
     @Singleton
-    abstract  fun viewModelFactory(viewModelFactory : ViewModelFactory<*>) : ViewModelProvider.Factory
+    abstract fun viewModelFactory(viewModelFactory: ViewModelFactory<*>): ViewModelProvider.Factory
 }
