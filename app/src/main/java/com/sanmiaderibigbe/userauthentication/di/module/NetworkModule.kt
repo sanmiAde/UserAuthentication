@@ -2,7 +2,7 @@ package com.sanmiaderibigbe.userauthentication.di.module
 
 import android.app.Application
 import com.sanmiaderibigbe.userauthentication.utils.AppConstants
-import com.sanmiaderibigbe.userauthentication.api.ApiInterface
+import com.sanmiaderibigbe.userauthentication.data.remote.ApiInterface
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides

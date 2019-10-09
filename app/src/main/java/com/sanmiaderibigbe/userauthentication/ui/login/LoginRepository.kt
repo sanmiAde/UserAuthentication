@@ -1,10 +1,8 @@
 package com.sanmiaderibigbe.userauthentication.ui.login
 
-import com.sanmiaderibigbe.userauthentication.api.ApiInterface
-import com.sanmiaderibigbe.userauthentication.data.sharedPref.AppPreferenceHelper
+import com.sanmiaderibigbe.userauthentication.data.remote.ApiInterface
 import com.sanmiaderibigbe.userauthentication.data.sharedPref.LoggedInMode
 import com.sanmiaderibigbe.userauthentication.data.sharedPref.PreferencesHelper
-import com.sanmiaderibigbe.userauthentication.di.qualifiers.SharedPreference
 import javax.inject.Inject
 
 class LoginRepository @Inject constructor(private val apiInterface: ApiInterface, private val preferenceHelper: PreferencesHelper) : ILoginRepository {

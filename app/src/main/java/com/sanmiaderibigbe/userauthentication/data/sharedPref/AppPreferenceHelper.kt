@@ -10,7 +10,8 @@ import javax.inject.Inject
 class AppPreferenceHelper @Inject constructor(private val context: Application) :
     PreferencesHelper {
 
-    private val prefs : SharedPreferences = context.getSharedPreferences(AppConstants.PREF_NAME, Context.MODE_PRIVATE)
+    private val prefs: SharedPreferences =
+        context.getSharedPreferences(AppConstants.PREF_NAME, Context.MODE_PRIVATE)
 
     override var userId: String
         get() = prefs.getString(PREF_KEY_USER_ID, "")!!
@@ -22,7 +23,7 @@ class AppPreferenceHelper @Inject constructor(private val context: Application) 
     override var accessToken: String
         get() = prefs.getString(PREF_KEY_ACCESS_TOKEN, "")!!
         set(value) {
-            prefs.edit{
+            prefs.edit {
                 putString(PREF_KEY_ACCESS_TOKEN, value)
             }
         }
@@ -35,14 +36,12 @@ class AppPreferenceHelper @Inject constructor(private val context: Application) 
             }
         }
 
-
-
-    override var loggedInMode:Int
+    override var loggedInMode: Int
         get() =
             prefs.getInt(
                 Companion.PREF_KEY_USER_LOGGED_IN_MODE,
-                LoggedInMode.LOGGED_OUT.type)
-
+                LoggedInMode.LOGGED_OUT.type
+            )
         set(value) {
             prefs.edit {
                 putInt(Companion.PREF_KEY_USER_LOGGED_IN_MODE, loggedInMode)
