@@ -18,5 +18,18 @@
         android:id="@+id/loginFragment"
         android:name="com.sanmiaderibigbe.userauthentication.ui.login.LoginFragment"
         android:label="login_fragment"
-        tools:layout="@layout/login_fragment" />
+        tools:layout="@layout/login_fragment">
+        <action
+            android:id="@+id/action_loginFragment_to_navigation"
+            app:destination="@id/navigation" />
+    </fragment>
+    <navigation
+        android:id="@+id/navigation"
+        app:startDestination="@id/signupFragment">
+        <fragment
+            android:id="@+id/signupFragment"
+            android:name="com.sanmiaderibigbe.userauthentication.ui.signup.SignupFragment"
+            android:label="fragment_signup"
+            tools:layout="@layout/fragment_signup" />
+    </navigation>
 </navigation>

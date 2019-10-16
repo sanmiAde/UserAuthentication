@@ -69,7 +69,7 @@ class AppPreferenceHelper @Inject constructor(private val context: Application) 
         private const val PREF_KEY_USER_TOKEN_EXPIRES = "PREF_KEY_USER_TOKEN_EXPIRES"
         private const val PREF_KEY_USER_EMAIL = "PREF_KEY_USER_USER_EMAIL"
         private const val PREF_KEY_REFRESH_TOKEN = "PREF_KEY_REFRESH_TOKEN"
-        private const val PREF_KEY_USER_LOGGED_IN_MODE = "PREF_KEY_USER_LOGGED_IN_MODE"
+        const val PREF_KEY_USER_LOGGED_IN_MODE = "PREF_KEY_USER_LOGGED_IN_MODE"
         private const val PREF_KEY_USER_ID = "PREF_KEY_USER_ID"
         private const val PREF_KEY_ACCESS_TOKEN = "PREF_KEY_ACCESS_TOKEN"
     }

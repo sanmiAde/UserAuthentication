@@ -10,6 +10,6 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBuilderModule {
 
     @MainActivityScope
-    @ContributesAndroidInjector(modules = [HomeFragmentBuilder::class, LoginFragmentBuilder::class, LoginRepoModule::class])
+    @ContributesAndroidInjector(modules = [HomeFragmentBuilder::class, LoginFragmentBuilder::class, LoginRepoModule::class, SignUpFragmentModule::class, SignUpRepoModule::class, HomeFragmentBuilder::class, HomeRepoModule::class])
     abstract fun  mainActivity() : MainActivity
 }
