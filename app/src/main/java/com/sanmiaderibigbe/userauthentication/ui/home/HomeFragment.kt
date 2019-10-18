@@ -11,11 +11,14 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 
 import com.sanmiaderibigbe.userauthentication.R
+import com.sanmiaderibigbe.userauthentication.data.remote.GetDataResult
+import com.sanmiaderibigbe.userauthentication.data.sharedPref.UserCredentialsData
 import com.sanmiaderibigbe.userauthentication.di.ViewModelFactory
 
 import com.sanmiaderibigbe.userauthentication.ui.login.LoginViewModel
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.home_fragment.*
+import timber.log.Timber
 import javax.inject.Inject
 
 class HomeFragment : DaggerFragment() {
@@ -24,6 +27,8 @@ class HomeFragment : DaggerFragment() {
 
     @Inject
     lateinit var homeViewModelFactory: ViewModelFactory<HomeViewModel>
+
+    private lateinit var userData: UserCredentialsData
 
     private val loginViewModel by lazy {
         //let passes it object and run passes this object. find out the difference
@@ -51,19 +56,53 @@ class HomeFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initClickListners()
+        initloginLiveData()
+
+
+    }
+
+    private fun initClickListners() {
+        btn_get_data.setOnClickListener {
+            initGetDataLiveData()
+        }
+    }
+
+    private fun initGetDataLiveData() {
+        homeViewModel.getUserId(
+            "Bearer ${userData.signInModel.tokenPair.accessToken}",
+            userData.email
+        )
+        homeViewModel.userDataLiveData.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                GetDataResult.Loading -> {
+                }
+                is GetDataResult.Success -> {
+                    Timber.d(it.result.userId)
+                    Toast.makeText(
+                        requireContext(),
+                        "${it.result.userId} ${it.result.email}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                is GetDataResult.Error -> {
+                    txt_data.text = it.errorMessage
+                }
+            }
+        })
+    }
+
+    private fun initloginLiveData() {
         loginViewModel.getLoginStatus().observe(viewLifecycleOwner, Observer {
-            when(it){
+            when (it) {
                 true -> {
                     Toast.makeText(requireContext(), "IUser  logged in ", Toast.LENGTH_LONG).show()
-                    txt.text =
-                        " ${homeViewModel.getUserData().signInModel.tokenPair.accessToken} ${homeViewModel.getUserData().email}"
+                    userData = homeViewModel.getUserData()
                 }
                 false -> {
                     findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
                 }
             }
         })
-
-
     }
 }
