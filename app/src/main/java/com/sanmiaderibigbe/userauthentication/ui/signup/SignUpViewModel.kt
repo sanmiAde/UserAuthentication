@@ -31,24 +31,23 @@ class SignUpViewModel @Inject constructor(
 
 
     fun signUp(email: String, password: String) {
-        compositeDisposable.add(signUpRepository.signUp(email, password)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                Timber.d(it.tokenPair.accessToken)
-                SharedPrefUtils.saveUserToSharePref(
-                    SignInResponseModel(it.msg, it.tokenPair),
-                    email,
-                    LoggedInMode.LOGGED_IN,
-                    sharedPreferences,
-                    moshi
-                ).subscribe {
-                    _signUpSuccessful.value = SignUpResult.Success(true)
-                }
+        compositeDisposable.add(
+            signUpRepository.signUp(email, password)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    Timber.d(it.tokenPair.accessToken)
+                    signUpRepository.saveUSerData(
+                        SignInResponseModel(it.msg, it.tokenPair),
+                        email,
+                        LoggedInMode.LOGGED_IN
+                    ).subscribe {
+                        _signUpSuccessful.value = SignUpResult.Success(true)
+                    }
 
-            }, {
-                Timber.d(it.localizedMessage)
-                _signUpSuccessful.value = SignUpResult.Error(false, it.localizedMessage)
-            })
+                }, {
+                    Timber.d(it.localizedMessage)
+                    _signUpSuccessful.value = SignUpResult.Error(false, it.localizedMessage!!)
+                })
         )
 
     }

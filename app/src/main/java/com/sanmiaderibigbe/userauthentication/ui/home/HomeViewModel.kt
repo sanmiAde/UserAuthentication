@@ -36,6 +36,8 @@ class HomeViewModel @Inject constructor(private val repository: IRepository) : V
                     Timber.d(it.body()?.userId)
                     _userDataLiveData.value =
                         GetDataResult.Success(UserDataModel(it.body()?.email, it.body()?.userId))
+                } else {
+                    _userDataLiveData.value = GetDataResult.Error(it.message())
                 }
 
             }, {
@@ -43,4 +45,6 @@ class HomeViewModel @Inject constructor(private val repository: IRepository) : V
             })
         )
     }
+
+
 }

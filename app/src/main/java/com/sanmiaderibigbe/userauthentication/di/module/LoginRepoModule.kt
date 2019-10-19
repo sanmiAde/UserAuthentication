@@ -1,6 +1,7 @@
 package com.sanmiaderibigbe.userauthentication.di.module
 
 import android.app.Application
+import android.content.SharedPreferences
 import com.sanmiaderibigbe.userauthentication.data.remote.ApiInterface
 import com.sanmiaderibigbe.userauthentication.data.sharedPref.AppPreferenceHelper
 import com.sanmiaderibigbe.userauthentication.data.sharedPref.PreferencesHelper
@@ -13,8 +14,12 @@ import dagger.Provides
 class LoginRepoModule {
 
     @Provides
-    fun provideRepo(apiInterface: ApiInterface, appPreferenceHelper: PreferencesHelper) : ILoginRepository {
-        return  LoginRepository( apiInterface, appPreferenceHelper )
+    fun provideRepo(
+        apiInterface: ApiInterface,
+        appPreferenceHelper: PreferencesHelper,
+        sharedPreferences: SharedPreferences
+    ): ILoginRepository {
+        return LoginRepository(apiInterface, appPreferenceHelper, sharedPreferences)
     }
 
     @Provides

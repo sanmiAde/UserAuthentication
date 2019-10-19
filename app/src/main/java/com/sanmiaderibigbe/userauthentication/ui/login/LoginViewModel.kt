@@ -19,4 +19,9 @@ class LoginViewModel @Inject constructor(val loginRepository: ILoginRepository) 
         userLoginStatusLivedata.value = loginRepository.isUserLoggedIn()
         return userLoginStatusLivedata
     }
+
+    fun logOutUser() {
+        loginRepository.logOut()
+        userLoginStatusLivedata.value = loginRepository.isUserLoggedIn()
+    }
 }

@@ -34,5 +34,14 @@ object SharedPrefUtils {
 
 
     }
+
+    fun deleteUserFromSharedPref(sharedPreference: SharedPreferences) {
+        sharedPreference.edit {
+            remove(AppConstants.USER_PREF_KEY)
+            putInt(AppPreferenceHelper.PREF_KEY_USER_LOGGED_IN_MODE, LoggedInMode.LOGGED_OUT.type)
+        }
+    }
+
 }
+
 

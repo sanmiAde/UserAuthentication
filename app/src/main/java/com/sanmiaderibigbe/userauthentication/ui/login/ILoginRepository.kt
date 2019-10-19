@@ -6,5 +6,6 @@ interface ILoginRepository {
     fun login(email : String, password : String)
 
     fun isUserLoggedIn() : Boolean
+    fun logOut()
 
 }

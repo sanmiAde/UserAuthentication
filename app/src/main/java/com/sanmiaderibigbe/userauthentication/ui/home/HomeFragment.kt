@@ -66,6 +66,11 @@ class HomeFragment : DaggerFragment() {
         btn_get_data.setOnClickListener {
             initGetDataLiveData()
         }
+
+        btn_log_out.setOnClickListener {
+            loginViewModel.logOutUser()
+
+        }
     }
 
     private fun initGetDataLiveData() {
