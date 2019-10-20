@@ -1,20 +1,18 @@
 package com.sanmiaderibigbe.userauthentication.ui.home
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-
 import com.sanmiaderibigbe.userauthentication.R
 import com.sanmiaderibigbe.userauthentication.data.remote.GetDataResult
 import com.sanmiaderibigbe.userauthentication.data.sharedPref.UserCredentialsData
 import com.sanmiaderibigbe.userauthentication.di.ViewModelFactory
-
 import com.sanmiaderibigbe.userauthentication.ui.login.LoginViewModel
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.home_fragment.*
@@ -105,7 +103,11 @@ class HomeFragment : DaggerFragment() {
                     userData = homeViewModel.getUserData()
                 }
                 false -> {
-                    findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+                    findNavController().navigate(
+                        R.id.action_homeFragment_to_loginFragment,
+                        null,
+                        NavOptions.Builder().setPopUpTo(R.id.homeFragment, true).build()
+                    )
                 }
             }
         })

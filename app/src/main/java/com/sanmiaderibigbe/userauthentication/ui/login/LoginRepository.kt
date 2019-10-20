@@ -1,12 +1,13 @@
 package com.sanmiaderibigbe.userauthentication.ui.login
 
 import android.content.SharedPreferences
-import androidx.core.content.edit
+import com.sanmiaderibigbe.userauthentication.data.local.UserModel
 import com.sanmiaderibigbe.userauthentication.data.remote.ApiInterface
+import com.sanmiaderibigbe.userauthentication.data.remote.SignUpReponseDto
 import com.sanmiaderibigbe.userauthentication.data.sharedPref.LoggedInMode
 import com.sanmiaderibigbe.userauthentication.data.sharedPref.PreferencesHelper
-import com.sanmiaderibigbe.userauthentication.utils.AppConstants
 import com.sanmiaderibigbe.userauthentication.utils.SharedPrefUtils
+import io.reactivex.Single
 import javax.inject.Inject
 
 class LoginRepository @Inject constructor(
@@ -24,8 +25,8 @@ class LoginRepository @Inject constructor(
       return preferenceHelper.loggedInMode == LoggedInMode.LOGGED_IN.type
     }
 
-    override fun login(email: String, password: String) {
-
+    override fun login(email: String, password: String): Single<SignUpReponseDto> {
+        return apiInterface.signIn(UserModel(email, password))
     }
 
 

@@ -12,4 +12,7 @@ interface ApiInterface {
 
     @GET("getuserid/{email}")
     fun getUserId(@Header("Authorization") authToken: String, @Path("email") email: String): Single<Response<UserDataDto>>
+
+    @POST("signin")
+    fun signIn(@Body userModel: UserModel): Single<SignUpReponseDto>
 }
