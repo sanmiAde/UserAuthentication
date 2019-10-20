@@ -1,6 +1,5 @@
 package com.sanmiaderibigbe.userauthentication.ui.home
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sanmiaderibigbe.userauthentication.data.local.UserDataModel
@@ -8,7 +7,6 @@ import com.sanmiaderibigbe.userauthentication.data.remote.GetDataResult
 import com.sanmiaderibigbe.userauthentication.data.sharedPref.UserCredentialsData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import timber.log.Timber
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(private val repository: IRepository) : ViewModel() {
@@ -32,13 +30,9 @@ class HomeViewModel @Inject constructor(private val repository: IRepository) : V
                 header,
                 email
             ).observeOn(AndroidSchedulers.mainThread()).subscribe({
-                if (it.isSuccessful) {
-                    Timber.d(it.body()?.userId)
+
                     _userDataLiveData.value =
-                        GetDataResult.Success(UserDataModel(it.body()?.email, it.body()?.userId))
-                } else {
-                    _userDataLiveData.value = GetDataResult.Error(it.message())
-                }
+                        GetDataResult.Success(UserDataModel(it?.email, it?.userId))
 
             }, {
                 _userDataLiveData.value = GetDataResult.Error(it.localizedMessage)
